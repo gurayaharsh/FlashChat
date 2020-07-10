@@ -1,6 +1,7 @@
 
 
 import UIKit
+import Firebase
 
 class ChatViewController: UIViewController {
 
@@ -9,6 +10,8 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = true
+        navigationItem.title = "Flash⚡️Chat"
 
     }
     
@@ -16,4 +19,13 @@ class ChatViewController: UIViewController {
     }
     
 
+    @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
+        do {
+            try Auth.auth().signOut()
+            navigationController?.popToRootViewController(animated: true)
+        } catch let signOutError as NSError {
+          print ("Error signing out: %@", signOutError)
+        }
+          
+    }
 }
